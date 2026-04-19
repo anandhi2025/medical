@@ -68,16 +68,62 @@ LLM_MODEL=tinyllama
 
 ## Deployment
 
+### GitHub Setup
+1. Create a new repository on GitHub
+2. Push your code:
+```bash
+git remote add origin https://github.com/YOUR_USERNAME/medical-research-assistant.git
+git branch -M main
+git push -u origin main
+```
+
 ### Vercel (Frontend)
 1. Connect your GitHub repository to Vercel
-2. Set build command: `npm run build`
-3. Set output directory: `dist`
+2. Set build settings:
+   - Build Command: `npm run build`
+   - Output Directory: `dist`
+3. Add environment variable:
+   - `VITE_BACKEND_URL`: Your backend API URL
 
 ### Backend Deployment
-Deploy to services like Railway, Render, or Heroku with the following considerations:
-- Ensure MongoDB is accessible
-- Set up Ollama or use cloud LLM service
-- Configure environment variables
+Deploy to services like Railway, Render, or Heroku:
+
+1. **Railway** (Recommended):
+   - Connect GitHub repo
+   - Set environment variables:
+     ```
+     MONGO_URI=your_mongodb_connection_string
+     PORT=5000
+     LLM_MODEL=tinyllama
+     ```
+   - Deploy automatically
+
+2. **Render**:
+   - Create new Web Service
+   - Connect GitHub repo
+   - Set build command: `npm install`
+   - Set start command: `node server.js`
+   - Add environment variables
+
+3. **Heroku**:
+   - Create new app
+   - Connect GitHub repo
+   - Enable automatic deploys
+   - Add config vars in settings
+
+### Environment Variables
+
+#### Frontend (.env)
+```env
+VITE_BACKEND_URL=https://your-backend-service-url
+```
+
+#### Backend (.env)
+```env
+MONGO_URI=your_mongodb_connection_string
+PORT=5000
+LLM_MODEL=tinyllama
+```
 
 ## Usage
 
